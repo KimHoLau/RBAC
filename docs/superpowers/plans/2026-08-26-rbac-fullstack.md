@@ -22,7 +22,7 @@
 - 认证：请求头 `Authorization: Bearer <token>`；JWT 含 uid/username/authorities，有效期配置化（默认 24h）
 - 接口路径与设计文档 §4 表格完全一致（全部以 `/api` 开头）
 - 密码：BCrypt；初始管理员 `admin/admin123`；重置密码默认值 `123456`
-- 权限标识格式 `system:user:list|add|edit|delete|resetPwd|assignRole`、`system:menu:list|add|edit|delete`；方法级控制用 `@PreAuthorize("hasAuthority('...')")`
+- 权限标识格式 `system:user:list|add|edit|delete|resetPwd|assignRole`、`system:menu:list|add|edit|delete`、`system:role:list|assignMenu`；方法级控制用 `@PreAuthorize("hasAuthority('...')")`
 - 不使用 Redis（设计文档标记可选）；不引入其他未列依赖
 - 验证门槛（无本地数据库）：后端 `mvn test` 全绿且不依赖 DB 连接；前端 `npm run build`（vue-tsc + vite build）零错误
 
@@ -44,6 +44,8 @@
 | 新增菜单 | POST | `/api/menus` | `system:menu:add` | MenuItem 字段 | `null` |
 | 修改菜单 | PUT | `/api/menus/{id}` | `system:menu:edit` | MenuItem 字段 | `null` |
 | 删除菜单 | DELETE | `/api/menus/{id}` | `system:menu:delete` | - | `null` |
+| 角色授权菜单查询 | GET | `/api/roles/{id}/menus` | `system:role:assignMenu` | - | `number[]`（已授权菜单ID，回显用） |
+| 角色授权菜单保存 | PUT | `/api/roles/{id}/menus` | `system:role:assignMenu` | `[1,2]`（全量覆盖的菜单ID数组） | `null` |
 
 共享类型：
 ```typescript

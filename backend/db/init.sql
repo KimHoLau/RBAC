@@ -87,10 +87,12 @@ INSERT INTO sys_menu (id, parent_id, menu_name, path, component, perms, icon, ty
     (6,  3, '用户删除', NULL,           NULL,                'system:user:delete', NULL,       2, 3),
     (7,  3, '重置密码', NULL,           NULL,                'system:user:resetPwd', NULL,     2, 4),
     (8,  3, '分配角色', NULL,           NULL,                'system:user:assignRole', NULL,   2, 5),
-    (9,  2, '菜单管理', '/system/menu', 'system/menu/index', 'system:menu:list',   'Menu',     1, 2),
+    (9, 2, '菜单管理', '/system/menu', 'system/menu/index', 'system:menu:list',   'Menu',     1, 2),
     (10, 9, '菜单新增', NULL,           NULL,                'system:menu:add',    NULL,       2, 1),
     (11, 9, '菜单修改', NULL,           NULL,                'system:menu:edit',   NULL,       2, 2),
-    (12, 9, '菜单删除', NULL,           NULL,                'system:menu:delete', NULL,       2, 3)
+    (12, 9, '菜单删除', NULL,           NULL,                'system:menu:delete', NULL,       2, 3),
+    (13, 2, '角色管理', '/system/role', 'system/role/index', 'system:role:list',   'Avatar',   1, 3),
+    (14, 13, '分配菜单', NULL,          NULL,                'system:role:assignMenu', NULL,   2, 1)
 ON CONFLICT (id) DO NOTHING;
 
 -- ---------------------------------------------------------------------------

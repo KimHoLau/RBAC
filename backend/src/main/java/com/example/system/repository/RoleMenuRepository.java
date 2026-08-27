@@ -9,6 +9,8 @@ public interface RoleMenuRepository extends JpaRepository<RoleMenu, Long> {
 
     List<RoleMenu> findByRoleIdIn(List<Long> roleIds);
 
+    List<RoleMenu> findByRoleId(Long roleId);
+
     boolean existsByMenuId(Long menuId);
 
     void deleteByRoleId(Long roleId);
