@@ -1,0 +1,12 @@
+target/
+.idea/
+*.iml
+.vscode/
+.omo/
+.codegraph/
+
+frontend/node_modules/
+frontend/dist/
+frontend/package-lock.json
+
+backend/target
