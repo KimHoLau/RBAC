@@ -4,9 +4,9 @@
 
 | 调整项 | 设计文档 | 实际采用 |
 |---|---|---|
-| 数据库 |  **PostgreSQL 14+** |
-| 后端框架 | **Spring Boot 4.0.8**（Spring Framework 7 / Security 7）|
-| ORM | **Spring Data JPA** |
+| 数据库 | MySQL 8.x | **PostgreSQL 14+** |
+| 后端框架 | Spring Boot 3.2.x | **Spring Boot 4.0.8**（Spring Framework 7 / Security 7）|
+| ORM | MyBatis-Plus | **Spring Data JPA** |
 
 ## 技术栈
 
@@ -98,4 +98,3 @@ cd frontend && npm run build
 - **按钮级权限**：自定义指令 `v-perms="'system:user:add'"`，依据 `/api/auth/info` 返回的 perms 集合控制元素显隐。
 - **无状态安全**：`SecurityFilterChain` 全局 STATELESS，仅放行登录接口；未认证请求由 `RestAuthenticationEntryPoint` 返回 `{code:401}` JSON，前端拦截器统一跳转登录页。
 - **密码存储**：BCrypt；种子管理员密码哈希与 `PasswordHashTest` 中常量保持一致，测试保证其与 `admin123` 匹配。
-
