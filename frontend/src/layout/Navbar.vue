@@ -1,0 +1,98 @@
+<template>
+  <div class="navbar-left">
+    <el-icon class="fold-btn" @click="toggleCollapse">
+      <component :is="collapse ? Expand : Fold" />
+    </el-icon>
+    <el-breadcrumb separator="/">
+      <el-breadcrumb-item v-for="(crumb, index) in breadcrumbs" :key="index">
+        {{ crumb }}
+      </el-breadcrumb-item>
+    </el-breadcrumb>
+  </div>
+
+  <div class="navbar-right">
+    <el-dropdown trigger="click" @command="handleCommand">
+      <span class="user-info">
+        <el-avatar :size="28" class="avatar">{{ avatarText }}</el-avatar>
+        <span class="nickname">{{ userStore.displayName }}</span>
+        <el-icon><ArrowDown /></el-icon>
+      </span>
+      <template #dropdown>
+        <el-dropdown-menu>
+          <el-dropdown-item command="logout">
+            <el-icon><SwitchButton /></el-icon>
+            退出登录
+          </el-dropdown-item>
+        </el-dropdown-menu>
+      </template>
+    </el-dropdown>
+  </div>
+</template>
+
+<script setup lang="ts">
+import { ArrowDown, Fold, Expand, SwitchButton } from '@element-plus/icons-vue'
+import { ElMessageBox } from 'element-plus'
+import { computed } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
+
+import { usePermissionStore } from '@/stores/permission'
+import { useUserStore } from '@/stores/user'
+
+const collapse = defineModel<boolean>('collapse', { default: false })
+
+const route = useRoute()
+const router = useRouter()
+const userStore = useUserStore()
+const permissionStore = usePermissionStore()
+
+const breadcrumbs = computed(() =>
+  route.matched.filter(record => record.meta?.title).map(record => String(record.meta.title))
+)
+
+const avatarText = computed(() => userStore.displayName.charAt(0).toUpperCase() || '?')
+
+function toggleCollapse(): void {
+  collapse.value = !collapse.value
+}
+
+async function handleCommand(command: string): Promise<void> {
+  if (command !== 'logout') return
+  try {
+    await ElMessageBox.confirm('确定要退出登录吗？', '提示', {
+      confirmButtonText: '确定',
+      cancelButtonText: '取消',
+      type: 'warning'
+    })
+  } catch {
+    return
+  }
+  userStore.logoutLocal()
+  permissionStore.reset()
+  router.replace('/login')
+}
+</script>
+
+<style scoped>
+.navbar-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.fold-btn {
+  font-size: 20px;
+  cursor: pointer;
+  color: #303133;
+}
+.navbar-right .user-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+.avatar {
+  background-color: #409eff;
+}
+.nickname {
+  color: #303133;
+}
+</style>
