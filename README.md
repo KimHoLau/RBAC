@@ -1,5 +1,7 @@
 # RBAC(Role-Based Access Control) 管理系统
 
+![image](https://github.com/KimHoLau/RBAC/blob/main/rbac-architecture.png)
+
 ## RBAC
 RBAC权限模型（Role-Based Access Control）即：基于角色的权限控制。模型中有几个关键的术语：
 - **用户**：系统接口及访问的操作者
