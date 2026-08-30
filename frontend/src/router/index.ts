@@ -66,8 +66,10 @@ router.beforeEach(async to => {
           router.addRoute('Layout', route)
         }
       })
-      // 重新解析当前目标，确保新注册的路由生效
-      return { ...to, replace: true }
+      // 重新解析当前目标，确保新注册的路由生效。
+      // 不能直接展开 to：整页刷新时 to 已按静态表解析（未知路径会命中 404 兜底），
+      // 展开会携带 name:'NotFound' 导致按名重解析再次落回 404；必须按 path 重新匹配
+      return { path: to.path, query: to.query, hash: to.hash, replace: true }
     } catch {
       userStore.logoutLocal()
       permissionStore.reset()

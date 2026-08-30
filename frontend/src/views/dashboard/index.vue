@@ -6,7 +6,7 @@
 
     <el-row :gutter="16">
       <el-col :span="12">
-        <h2 class="greeting">{{ greeting }}，{{ userStore.displayName }} 👋</h2>
+        <h2 class="greeting">{{ greeting }}，{{ userStore.displayName }}</h2>
         <p class="sub">欢迎使用 RBAC 管理系统，左侧菜单由后端权限动态生成。</p>
       </el-col>
     </el-row>
@@ -58,28 +58,31 @@ const greeting = computed(() => {
 <style scoped>
 .greeting {
   margin: 8px 0;
-  color: #303133;
+  color: var(--ink-900);
+  letter-spacing: -0.02em;
 }
 .sub {
-  color: #909399;
+  color: var(--ink-500);
 }
 .info-row {
   margin-top: 16px;
 }
 .stat-label {
-  color: #909399;
+  color: var(--ink-500);
   font-size: 13px;
   margin-bottom: 8px;
 }
 .stat-value {
   font-size: 22px;
   font-weight: 600;
-  color: #303133;
+  color: var(--ink-900);
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
 }
 .tag {
   margin-right: 8px;
 }
 .muted {
-  color: #c0c4cc;
+  color: var(--ink-300);
 }
 </style>

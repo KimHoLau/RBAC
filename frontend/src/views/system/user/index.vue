@@ -25,20 +25,20 @@
 
     <!-- 用户表格 -->
     <el-table v-loading="loading" :data="list" border stripe>
-      <el-table-column prop="id" label="ID" width="70" align="center" />
-      <el-table-column prop="username" label="用户名" min-width="120" />
-      <el-table-column prop="nickname" label="昵称" min-width="120" show-overflow-tooltip />
-      <el-table-column prop="email" label="邮箱" min-width="160" show-overflow-tooltip />
-      <el-table-column prop="phone" label="手机号" width="130" />
-      <el-table-column label="状态" width="90" align="center">
+      <el-table-column prop="id" label="ID" width="60" align="center" />
+      <el-table-column prop="username" label="用户名" min-width="100" />
+      <el-table-column prop="nickname" label="昵称" min-width="90" show-overflow-tooltip />
+      <el-table-column prop="email" label="邮箱" min-width="130" show-overflow-tooltip />
+      <el-table-column prop="phone" label="手机号" width="110" />
+      <el-table-column label="状态" width="80" align="center">
         <template #default="{ row }">
           <el-tag :type="row.status === 1 ? 'success' : 'danger'">
             {{ row.status === 1 ? '启用' : '禁用' }}
           </el-tag>
         </template>
       </el-table-column>
-      <el-table-column prop="createTime" label="创建时间" width="170" />
-      <el-table-column label="操作" width="330" align="center" fixed="right">
+      <el-table-column prop="createTime" label="创建时间" width="160" />
+      <el-table-column label="操作" width="260" align="center">
         <template #default="{ row }">
           <el-button v-perms="'system:user:edit'" link type="primary" @click="openEdit(row)">
             编辑

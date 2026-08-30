@@ -1,3 +1,145 @@
+/* ==========================================================================
+   Frosted Aurora — 磨砂玻璃设计系统（白天 / 黑夜双主题）
+   契约文件：frontend/DESIGN.md（所有值均可在其中找到出处）
+   主题机制：材质全部收敛为 :root token，html.dark 仅翻转 token，
+   组件规则本身不感知主题
+   ========================================================================== */
+
+:root {
+  color-scheme: light;
+
+  /* 极光场 */
+  --aurora-base: #eef2f8;
+  --aurora-scene:
+    radial-gradient(42rem 42rem at 85% 12%, rgba(147, 197, 253, 0.5), transparent 60%),
+    radial-gradient(38rem 38rem at 8% 30%, rgba(196, 181, 253, 0.42), transparent 62%),
+    radial-gradient(36rem 36rem at 78% 82%, rgba(254, 215, 170, 0.35), transparent 60%),
+    radial-gradient(30rem 30rem at 18% 88%, rgba(165, 243, 224, 0.3), transparent 62%),
+    linear-gradient(180deg, #f2f5fa 0%, #e9eef7 100%);
+
+  /* 文字 */
+  --ink-900: #1d1d1f;
+  --ink-500: #6e6e73;
+  --ink-300: #a1a1aa;
+
+  /* Action 色（唯一强调色） */
+  --accent: #0071e3;
+  --accent-hover: #3395ea;
+  --accent-tint: rgba(0, 113, 227, 0.1);
+  --accent-weak: rgba(0, 113, 227, 0.08);
+
+  /* 玻璃材质 */
+  --glass-rim: rgba(255, 255, 255, 0.65);
+  --glass-sheen: rgba(255, 255, 255, 0.6);
+  --hairline: rgba(255, 255, 255, 0.55);
+  --line-soft: rgba(29, 29, 31, 0.06);
+  --hover-fill: rgba(255, 255, 255, 0.55);
+  --input-bg: rgba(255, 255, 255, 0.55);
+  --input-border: rgba(29, 29, 31, 0.1);
+  --input-border-hover: rgba(29, 29, 31, 0.18);
+  --menu-text: #4e4e52;
+  --table-header-bg: rgba(255, 255, 255, 0.45);
+  --table-row-hover: rgba(255, 255, 255, 0.5);
+  --pagination-btn-bg: rgba(255, 255, 255, 0.5);
+
+  /* 面板底与投影（完整梯度串，便于主题整体翻转） */
+  --card-bg: linear-gradient(150deg, rgba(255, 255, 255, 0.72), rgba(255, 255, 255, 0.55));
+  --card-bg-nested: linear-gradient(150deg, rgba(255, 255, 255, 0.55), rgba(255, 255, 255, 0.4));
+  --rail-bg: linear-gradient(180deg, rgba(255, 255, 255, 0.66), rgba(255, 255, 255, 0.5));
+  --bar-bg: linear-gradient(135deg, rgba(255, 255, 255, 0.66), rgba(255, 255, 255, 0.5));
+  --pop-bg: linear-gradient(150deg, rgba(255, 255, 255, 0.92), rgba(255, 255, 255, 0.82));
+  --dialog-bg: linear-gradient(150deg, rgba(255, 255, 255, 0.88), rgba(255, 255, 255, 0.78));
+  --elev-1: 0 2px 12px rgba(31, 45, 61, 0.05);
+  --elev-2: 0 8px 32px rgba(31, 45, 61, 0.08);
+  --elev-3: 0 12px 40px rgba(31, 45, 61, 0.14);
+  --elev-4: 0 24px 64px rgba(31, 45, 61, 0.18);
+  --bar-shadow: 0 1px 24px rgba(31, 45, 61, 0.05);
+
+  /* 动效曲线 */
+  --ease-fluid: cubic-bezier(0.32, 0.72, 0, 1);
+
+  /* Element Plus 品牌变量对齐（白天） */
+  --el-color-primary: var(--accent);
+  --el-color-primary-light-3: #3395ea;
+  --el-color-primary-light-5: #66b3f0;
+  --el-color-primary-light-7: #b3d8f7;
+  --el-color-primary-light-8: #cce5fa;
+  --el-color-primary-light-9: #e6f2fd;
+  --el-color-primary-dark-2: #005bb8;
+  --el-text-color-primary: var(--ink-900);
+  --el-text-color-regular: #4e4e52;
+  --el-text-color-secondary: var(--ink-500);
+  --el-text-color-placeholder: #a8abb2;
+  --el-border-color: rgba(29, 29, 31, 0.1);
+  --el-border-color-light: rgba(29, 29, 31, 0.08);
+  --el-border-color-lighter: rgba(29, 29, 31, 0.06);
+  --el-border-radius-base: 8px;
+  --el-font-family: 'SF Pro Text', 'SF Pro Display', -apple-system,
+    BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB',
+    'Microsoft YaHei', 'Helvetica Neue', Arial, sans-serif;
+}
+
+/* 黑夜：仅翻转 token，EP 暗色基底（dark/css-vars.css）之上再对齐本系统 */
+html.dark {
+  color-scheme: dark;
+
+  --aurora-base: #0a1120;
+  --aurora-scene:
+    radial-gradient(42rem 42rem at 85% 12%, rgba(30, 90, 180, 0.3), transparent 60%),
+    radial-gradient(38rem 38rem at 8% 30%, rgba(110, 70, 200, 0.22), transparent 62%),
+    radial-gradient(36rem 36rem at 78% 82%, rgba(180, 90, 40, 0.12), transparent 60%),
+    radial-gradient(30rem 30rem at 18% 88%, rgba(20, 120, 100, 0.14), transparent 62%),
+    linear-gradient(180deg, #0c1428 0%, #070d1c 100%);
+
+  --ink-900: #e8edf6;
+  --ink-500: #9aa7bd;
+  --ink-300: #5f6c84;
+
+  --accent-tint: rgba(77, 163, 255, 0.16);
+  --accent-weak: rgba(77, 163, 255, 0.14);
+
+  --glass-rim: rgba(140, 180, 255, 0.16);
+  --glass-sheen: rgba(255, 255, 255, 0.07);
+  --hairline: rgba(140, 180, 255, 0.14);
+  --line-soft: rgba(255, 255, 255, 0.07);
+  --hover-fill: rgba(120, 160, 230, 0.12);
+  --input-bg: rgba(255, 255, 255, 0.06);
+  --input-border: rgba(255, 255, 255, 0.14);
+  --input-border-hover: rgba(255, 255, 255, 0.26);
+  --menu-text: #b6c2d9;
+  --table-header-bg: rgba(255, 255, 255, 0.04);
+  --table-row-hover: rgba(120, 160, 230, 0.1);
+  --pagination-btn-bg: rgba(255, 255, 255, 0.08);
+
+  --card-bg: linear-gradient(150deg, rgba(22, 34, 62, 0.62), rgba(12, 20, 40, 0.5));
+  --card-bg-nested: linear-gradient(150deg, rgba(20, 30, 56, 0.45), rgba(10, 17, 34, 0.35));
+  --rail-bg: linear-gradient(180deg, rgba(16, 26, 50, 0.66), rgba(9, 15, 30, 0.55));
+  --bar-bg: linear-gradient(135deg, rgba(16, 26, 50, 0.66), rgba(9, 15, 30, 0.55));
+  --pop-bg: linear-gradient(150deg, rgba(24, 36, 64, 0.95), rgba(14, 22, 44, 0.9));
+  --dialog-bg: linear-gradient(150deg, rgba(20, 32, 60, 0.92), rgba(10, 18, 38, 0.9));
+  --elev-1: 0 2px 12px rgba(0, 0, 0, 0.35);
+  --elev-2: 0 8px 32px rgba(0, 0, 0, 0.4);
+  --elev-3: 0 12px 40px rgba(0, 0, 0, 0.5);
+  --elev-4: 0 24px 64px rgba(0, 0, 0, 0.55);
+  --bar-shadow: 0 1px 24px rgba(0, 0, 0, 0.3);
+
+  /* EP 暗色基底上对齐 accent 蓝与中性色（本文件晚于 EP dark css-vars 引入，可覆盖） */
+  --el-color-primary: var(--accent);
+  --el-color-primary-light-3: #1d5d9f;
+  --el-color-primary-light-5: #174a80;
+  --el-color-primary-light-7: #12365e;
+  --el-color-primary-light-8: #102c4e;
+  --el-color-primary-light-9: #0d2440;
+  --el-color-primary-dark-2: #3395ea;
+  --el-text-color-primary: var(--ink-900);
+  --el-text-color-regular: #c0c8d6;
+  --el-text-color-secondary: var(--ink-500);
+  --el-text-color-placeholder: #5f6c84;
+  --el-border-color: rgba(255, 255, 255, 0.14);
+  --el-border-color-light: rgba(255, 255, 255, 0.1);
+  --el-border-color-lighter: rgba(255, 255, 255, 0.07);
+}
+
 html,
 body,
 #app {
@@ -7,56 +149,312 @@ body,
 }
 
 body {
-  font-family: 'Helvetica Neue', Helvetica, 'PingFang SC', 'Hiragino Sans GB',
-    'Microsoft YaHei', Arial, sans-serif;
+  font-family: var(--el-font-family);
   -webkit-font-smoothing: antialiased;
-  background-color: #f5f7fa;
+  background-color: var(--aurora-base);
+  color: var(--ink-900);
 }
 
-/* layout -------------------------------------------------------------- */
+/* 极光场：固定装饰层（多层光斑 = 蓝→紫→蜜桃→薄荷，非单一色调） */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: var(--aurora-scene);
+}
+
+::selection {
+  background: var(--accent-tint);
+}
+
+/* scrollbars ----------------------------------------------------------- */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--input-border);
+  border-radius: 999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--input-border-hover);
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* 玻璃面板原语 ----------------------------------------------------------- */
+/* glass-card：页面卡片 / 统计卡（配方：tint + blur + rim + sheen + 柔影） */
+.el-card {
+  border-radius: 14px;
+  border: 1px solid var(--glass-rim);
+  background: var(--card-bg);
+  backdrop-filter: blur(18px) saturate(160%);
+  -webkit-backdrop-filter: blur(18px) saturate(160%);
+  box-shadow:
+    inset 0 1px 0 var(--glass-sheen),
+    var(--elev-2);
+  transition: transform 0.2s var(--ease-fluid), box-shadow 0.2s var(--ease-fluid);
+}
+.el-card__header {
+  border-bottom: 1px solid var(--line-soft);
+}
+.el-card.is-hover-shadow:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    inset 0 1px 0 var(--glass-sheen),
+    var(--elev-3);
+}
+/* 卡片内嵌套的统计卡：弱一级，避免玻璃叠玻璃发闷 */
+.page-card .el-card {
+  background: var(--card-bg-nested);
+  box-shadow:
+    inset 0 1px 0 var(--glass-sheen),
+    var(--elev-1);
+}
+
+/* 布局 ------------------------------------------------------------------ */
 .layout-aside {
-  transition: width 0.25s;
+  transition: width 0.25s var(--ease-fluid);
   overflow-x: hidden;
 }
-
+/* glass-rail：侧边栏 */
+.layout-aside {
+  background: var(--rail-bg);
+  backdrop-filter: blur(18px) saturate(160%);
+  -webkit-backdrop-filter: blur(18px) saturate(160%);
+  border-right: 1px solid var(--hairline);
+}
+/* glass-bar：悬浮顶栏，内容从其下方穿过 */
 .layout-header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 20;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: #fff;
-  border-bottom: 1px solid #e4e7ed;
+  background: var(--bar-bg);
+  backdrop-filter: blur(18px) saturate(160%);
+  -webkit-backdrop-filter: blur(18px) saturate(160%);
+  border-bottom: 1px solid var(--hairline);
+  box-shadow: var(--bar-shadow);
 }
 
 .page-card {
   min-height: calc(100vh - 120px);
 }
 
-/* transitions ---------------------------------------------------------- */
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.2s ease;
+/* 侧边栏菜单：玻璃轨道 + 胶囊几何 ----------------------------------------- */
+.sidebar-menu {
+  --el-menu-bg-color: transparent;
+  --el-menu-text-color: var(--menu-text);
+  --el-menu-hover-text-color: var(--ink-900);
+  --el-menu-hover-bg-color: var(--hover-fill);
+  --el-menu-active-color: var(--accent);
+  --el-menu-item-height: 44px;
+  --el-menu-sub-item-height: 40px;
+  border-right: none;
+  background-color: transparent;
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
-.fade-enter-from,
-.fade-leave-to {
-  opacity: 0;
+.sidebar-menu:not(.is-collapse) {
+  width: 210px;
+}
+.sidebar-menu .el-menu-item,
+.sidebar-menu .el-sub-menu__title {
+  margin: 2px 8px;
+  border-radius: 8px;
+  transition: background-color 0.16s var(--ease-fluid), color 0.16s var(--ease-fluid);
+}
+.sidebar-menu .el-menu-item:hover,
+.sidebar-menu .el-sub-menu__title:hover {
+  background-color: var(--hover-fill);
+  color: var(--ink-900);
+}
+.sidebar-menu .el-menu-item.is-active {
+  background-color: var(--accent-tint);
+  color: var(--accent);
+  font-weight: 600;
+}
+/* 折叠态弹出的子菜单（teleport 到 body，需全局玻璃） */
+.el-menu--vertical .el-menu--popup {
+  padding: 6px;
+  border-radius: 12px;
+  border: 1px solid var(--glass-rim);
+  background: var(--pop-bg);
+  backdrop-filter: blur(18px) saturate(160%);
+  -webkit-backdrop-filter: blur(18px) saturate(160%);
+  box-shadow: var(--elev-3);
+}
+.el-menu--popup .el-menu-item {
+  margin: 1px 0;
+  border-radius: 8px;
 }
 
-/* login ---------------------------------------------------------------- */
+/* 表格：透明底让玻璃透出 -------------------------------------------------- */
+.el-table {
+  --el-table-bg-color: transparent;
+  --el-table-tr-bg-color: transparent;
+  --el-table-header-bg-color: var(--table-header-bg);
+  --el-table-header-text-color: var(--ink-500);
+  --el-table-border-color: var(--line-soft);
+  --el-table-row-hover-bg-color: var(--table-row-hover);
+}
+/* 注意：玻璃表格不要给列加 fixed="left/right" —— sticky 固定列悬浮于其它列之上，
+   要么透底叠字、要么加底色出现白块，与玻璃材质根本冲突（见 DESIGN.md 技术债） */
+
+/* 表单输入：glass-input --------------------------------------------------- */
+.el-input__wrapper,
+.el-textarea__inner {
+  background-color: var(--input-bg);
+}
+.el-input__wrapper {
+  box-shadow: 0 0 0 1px var(--input-border) inset;
+  transition: box-shadow 0.16s var(--ease-fluid);
+}
+.el-input__wrapper:hover {
+  box-shadow: 0 0 0 1px var(--input-border-hover) inset;
+}
+.el-input__wrapper.is-focus {
+  box-shadow: 0 0 0 1.5px rgba(0, 113, 227, 0.55) inset;
+}
+
+/* 弹层：glass-pop --------------------------------------------------------- */
+.el-popper.is-light {
+  border-radius: 12px;
+  border: 1px solid var(--glass-rim);
+  background: var(--pop-bg);
+  backdrop-filter: blur(18px) saturate(160%);
+  -webkit-backdrop-filter: blur(18px) saturate(160%);
+  box-shadow: var(--elev-3);
+}
+.el-popper.is-light .el-popper__arrow::before {
+  border: 1px solid var(--glass-rim);
+  background: var(--pop-bg);
+}
+.el-dropdown-menu {
+  background: transparent;
+}
+.el-dropdown-menu__item:not(.is-disabled):hover,
+.el-dropdown-menu__item:not(.is-disabled):focus {
+  background-color: var(--accent-weak);
+  color: var(--accent);
+}
+.el-overlay {
+  background-color: rgba(31, 45, 61, 0.28);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+html.dark .el-overlay {
+  background-color: rgba(2, 6, 16, 0.55);
+}
+.el-dialog,
+.el-message-box {
+  border-radius: 16px;
+  border: 1px solid var(--glass-rim);
+  background: var(--dialog-bg);
+  backdrop-filter: blur(24px) saturate(160%);
+  -webkit-backdrop-filter: blur(24px) saturate(160%);
+  box-shadow:
+    inset 0 1px 0 var(--glass-sheen),
+    var(--elev-4);
+}
+.el-message {
+  border-radius: 999px;
+  border: 1px solid var(--glass-rim);
+  background: var(--pop-bg);
+  backdrop-filter: blur(16px) saturate(160%);
+  -webkit-backdrop-filter: blur(16px) saturate(160%);
+  box-shadow: var(--elev-3);
+}
+
+/* 分页 */
+.el-pagination {
+  --el-pagination-button-bg-color: var(--pagination-btn-bg);
+}
+
+/* transitions ------------------------------------------------------------ */
+.fade-slide-enter-active,
+.fade-slide-leave-active {
+  transition: opacity 0.22s var(--ease-fluid), transform 0.22s var(--ease-fluid);
+}
+.fade-slide-enter-from {
+  opacity: 0;
+  transform: translateY(8px);
+}
+.fade-slide-leave-to {
+  opacity: 0;
+  transform: translateY(-4px);
+}
+
+/* login ------------------------------------------------------------------ */
+/* 登录页背景为固定的科幻深空场景，不随主题切换（深空本身就是"夜"） */
 .login-container {
   display: flex;
   align-items: center;
   justify-content: center;
   height: 100%;
-  background: linear-gradient(135deg, #1f2d3d 0%, #2b4a6f 100%);
+  /* 科幻深空场景（本地 SVG 资产，离线可用），玻璃卡片压在场景上自然磨砂透星 */
+  background: url('../assets/login-bg.svg') center / cover no-repeat;
 }
+/* 登录卡：深色玻璃（科幻场景专属变体，与后台浅色玻璃形成入口对比） */
 .login-card {
   width: 400px;
-  padding: 32px 36px 24px;
-  border-radius: 8px;
+  padding: 40px 36px 28px;
+  border-radius: 16px;
+  border: 1px solid rgba(140, 180, 255, 0.28);
+  background: linear-gradient(160deg, rgba(16, 28, 58, 0.62), rgba(8, 15, 35, 0.72));
+  backdrop-filter: blur(24px) saturate(150%);
+  -webkit-backdrop-filter: blur(24px) saturate(150%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.12),
+    0 24px 64px rgba(2, 8, 28, 0.6);
 }
 .login-title {
   text-align: center;
-  margin: 0 0 24px;
-  color: #303133;
-  font-weight: 600;
+  margin: 0 0 28px;
+  color: #f2f7ff;
+  font-weight: 700;
+  font-size: 22px;
+  letter-spacing: 0.02em;
+}
+/* 暗玻璃内的输入框与文字 */
+.login-card .el-input__wrapper {
+  background-color: rgba(255, 255, 255, 0.08);
+}
+.login-card .el-input__wrapper:hover {
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.32) inset;
+}
+.login-card .el-input__wrapper.is-focus {
+  box-shadow: 0 0 0 1.5px rgba(77, 163, 255, 0.8) inset;
+}
+.login-card .el-input__inner {
+  color: #eef4ff;
+  caret-color: #4da3ff;
+}
+.login-card .el-input__inner::placeholder {
+  color: rgba(238, 244, 255, 0.45);
+}
+.login-card .el-input__prefix {
+  color: rgba(238, 244, 255, 0.6);
+}
+/* CTA 辉光：科幻签名 */
+.login-card .login-btn {
+  box-shadow: 0 4px 24px rgba(0, 113, 227, 0.5);
+}
+
+/* 无障碍：尊重减弱动效偏好 -------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
 }

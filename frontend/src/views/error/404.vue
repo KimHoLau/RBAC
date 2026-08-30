@@ -24,9 +24,9 @@ const router = useRouter()
 .not-found h1 {
   font-size: 72px;
   margin: 0;
-  color: #409eff;
+  color: var(--accent);
 }
 .not-found p {
-  color: #909399;
+  color: var(--ink-500);
 }
 </style>

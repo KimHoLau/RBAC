@@ -16,25 +16,25 @@
       default-expand-all
       :tree-props="{ children: 'children' }"
     >
-      <el-table-column prop="menuName" label="名称" min-width="180" />
+      <el-table-column prop="menuName" label="名称" min-width="140" />
       <el-table-column label="类型" width="80" align="center">
         <template #default="{ row }">
           <el-tag :type="typeTag(row.type)">{{ typeLabel(row.type) }}</el-tag>
         </template>
       </el-table-column>
-      <el-table-column prop="path" label="路由地址" min-width="140" show-overflow-tooltip />
-      <el-table-column prop="component" label="组件路径" min-width="180" show-overflow-tooltip />
-      <el-table-column prop="perms" label="权限标识" min-width="170" show-overflow-tooltip />
-      <el-table-column prop="icon" label="图标" width="110" show-overflow-tooltip />
-      <el-table-column prop="sort" label="排序" width="70" align="center" />
-      <el-table-column label="状态" width="90" align="center">
+      <el-table-column prop="path" label="路由地址" min-width="120" show-overflow-tooltip />
+      <el-table-column prop="component" label="组件路径" min-width="130" show-overflow-tooltip />
+      <el-table-column prop="perms" label="权限标识" min-width="130" show-overflow-tooltip />
+      <el-table-column prop="icon" label="图标" width="90" show-overflow-tooltip />
+      <el-table-column prop="sort" label="排序" width="60" align="center" />
+      <el-table-column label="状态" width="80" align="center">
         <template #default="{ row }">
           <el-tag :type="row.status === 1 ? 'success' : 'danger'">
             {{ row.status === 1 ? '启用' : '禁用' }}
           </el-tag>
         </template>
       </el-table-column>
-      <el-table-column label="操作" width="160" align="center" fixed="right">
+      <el-table-column label="操作" width="170" align="center">
         <template #default="{ row }">
           <el-button
             v-if="row.type !== 2"

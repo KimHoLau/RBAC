@@ -8,13 +8,13 @@
       <Sidebar :collapse="collapse" />
     </el-aside>
 
-    <el-container>
+    <el-container class="layout-body">
       <el-header height="56px" class="layout-header">
         <Navbar v-model:collapse="collapse" />
       </el-header>
       <el-main class="layout-main">
         <router-view v-slot="{ Component }">
-          <transition name="fade" mode="out-in">
+          <transition name="fade-slide" mode="out-in">
             <component :is="Component" />
           </transition>
         </router-view>
@@ -36,29 +36,35 @@ const collapse = ref(false)
 .layout-root {
   height: 100%;
 }
-.layout-aside {
-  display: flex;
-  flex-direction: column;
-  background-color: #001529;
+/* 顶栏在其上悬浮，内容从底部穿过 */
+.layout-body {
+  position: relative;
+}
+.layout-main {
+  padding: 72px 16px 20px;
 }
 .logo-bar {
   height: 56px;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #fff;
-  font-weight: 600;
+  gap: 8px;
+  color: var(--ink-900);
+  font-weight: 700;
   letter-spacing: 1px;
+  flex-shrink: 0;
+  border-bottom: 1px solid var(--hairline);
+}
+.logo-bar::before {
+  content: '';
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--accent), #66b3f0);
+  box-shadow: 0 0 0 3px rgba(0, 113, 227, 0.15);
   flex-shrink: 0;
 }
 .logo-mini {
   font-size: 18px;
-}
-.layout-main {
-  padding: 16px;
-}
-.sidebar-menu {
-  border-right: none;
-  flex: 1;
 }
 </style>
