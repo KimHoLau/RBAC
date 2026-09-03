@@ -65,6 +65,10 @@ box-shadow:
 | `glass-pop` | 玻璃配方 + radius 12 + 更深阴影 | 下拉/对话框/MessageBox/Select 弹层 |
 | `glass-input` | `rgba(255,255,255,0.55)` 底 + 发丝灰描边 | `el-input` 内层 |
 | `pill-active` | `--accent-tint` 底 + `--accent` 文字 + radius 8 | 侧栏菜单激活态（胶囊几何） |
+| `toolbar` | flex 行 · gap 8px · 下缘间距 16px | 列表页操作工具栏（`.toolbar`，全局原语，页面不得重复声明） |
+| `pagination-bar` | 右对齐 · 上缘间距 16px | 列表页分页条（`.pagination-bar`，全局原语，页面不得重复声明） |
+
+> 铁律：组件样式一律走 token（`styles/index.css` 定义的 CSS 变量或 EP 变量），禁止硬编码颜色/圆角/阴影 —— 硬编码值不随 `html.dark` 翻转，是双主题的头号破坏源。
 
 ## 3. 动效
 

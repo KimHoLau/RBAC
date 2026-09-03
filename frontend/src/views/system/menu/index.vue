@@ -299,11 +299,3 @@ onMounted(() => {
   void loadTree()
 })
 </script>
-
-<style scoped>
-.toolbar {
-  margin-bottom: 12px;
-  display: flex;
-  gap: 8px;
-}
-</style>

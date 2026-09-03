@@ -134,13 +134,13 @@ onMounted(() => {
 <style scoped>
 .assign-target {
   margin: 0 0 12px;
-  color: #606266;
+  color: var(--el-text-color-regular);
 }
 .menu-tree {
   max-height: 420px;
   overflow-y: auto;
-  border: 1px solid #ebeef5;
-  border-radius: 4px;
+  border: 1px solid var(--input-border);
+  border-radius: 8px;
   padding: 8px;
 }
 </style>

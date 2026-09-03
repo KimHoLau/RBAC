@@ -58,6 +58,8 @@ const greeting = computed(() => {
 <style scoped>
 .greeting {
   margin: 8px 0;
+  font-size: 20px;
+  font-weight: 600;
   color: var(--ink-900);
   letter-spacing: -0.02em;
 }

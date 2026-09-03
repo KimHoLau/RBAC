@@ -110,7 +110,7 @@ async function handleCommand(command: string): Promise<void> {
   transition: background-color 0.16s var(--ease-fluid);
 }
 .navbar-right .user-info:hover {
-  background-color: rgba(255, 255, 255, 0.55);
+  background-color: var(--hover-fill);
 }
 .avatar {
   background-color: var(--accent);

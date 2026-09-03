@@ -60,8 +60,8 @@ const collapse = ref(false)
   width: 9px;
   height: 9px;
   border-radius: 50%;
-  background: linear-gradient(135deg, var(--accent), #66b3f0);
-  box-shadow: 0 0 0 3px rgba(0, 113, 227, 0.15);
+  background: linear-gradient(135deg, var(--accent), var(--accent-grad-end));
+  box-shadow: 0 0 0 3px var(--accent-ring);
   flex-shrink: 0;
 }
 .logo-mini {

@@ -352,16 +352,8 @@ onMounted(() => {
 </script>
 
 <style scoped>
-.toolbar {
-  margin-bottom: 12px;
-}
-.pagination-bar {
-  display: flex;
-  justify-content: flex-end;
-  margin-top: 12px;
-}
 .role-target {
   margin: 0 0 12px;
-  color: #606266;
+  color: var(--el-text-color-regular);
 }
 </style>
