@@ -82,3 +82,17 @@ cd frontend && npm run build          # vue-tsc 类型检查 + vite build
 
 - **README 与实际默认值不一致**：README 称数据库默认口令 `postgres/postgres`，但 `application.yml` 中 `DB_PASSWORD` 默认实为 `123456`。连不上库先查这里。
 - 动态路由与静态路由同名（如仪表盘）时，静态声明优先，守卫用 `router.hasRoute(name)` 去重。
+
+## Agent skills
+
+### Issue tracker
+
+问题以本地 markdown 文件形式存放在 `.scratch/<feature>/` 目录下，不使用 GitHub Issues。详见 `docs/agents/issue-tracker.md`。
+
+### Triage labels
+
+使用五个默认 triage 标签：`needs-triage`、`needs-info`、`ready-for-agent`、`ready-for-human`、`wontfix`。详见 `docs/agents/triage-labels.md`。
+
+### Domain docs
+
+single-context 布局：根目录 `CONTEXT.md` + `docs/adr/`。详见 `docs/agents/domain.md`。
