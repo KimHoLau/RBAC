@@ -415,6 +415,7 @@ html.dark .el-overlay {
 /* login ------------------------------------------------------------------ */
 /* 登录页背景为固定的科幻深空场景，不随主题切换（深空本身就是"夜"） */
 .login-container {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -422,10 +423,81 @@ html.dark .el-overlay {
   /* 科幻深空场景（本地 SVG 资产，离线可用），玻璃卡片压在场景上自然磨砂透星 */
   background: url('../assets/login-bg.svg') center / cover no-repeat;
 }
+
+/* 深空动效层：叠加在静态场景之上（background-image 里的 SVG 无法被 CSS 驱动），
+   仅 transform/opacity 动画，慢节奏电影感（见 docs/adr/0001-login-ambient-motion.md），
+   prefers-reduced-motion 下随全局规则静止 */
+.login-fx {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+.login-fx svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+/* 星云慢漂移（60s 级 alternate） */
+.fx-drift-a {
+  animation: fx-drift-a 75s var(--ease-fluid) infinite alternate;
+}
+.fx-drift-b {
+  animation: fx-drift-b 90s var(--ease-fluid) infinite alternate;
+}
+@keyframes fx-drift-a {
+  from { transform: translate(0, 0); }
+  to { transform: translate(-52px, 22px); }
+}
+@keyframes fx-drift-b {
+  from { transform: translate(0, 0); }
+  to { transform: translate(44px, -18px); }
+}
+/* 流星：飞行段只占循环前 ~13%，其余时间隐于终点；两颗错峰 */
+.fx-meteor {
+  opacity: 0;
+}
+.fx-meteor-a {
+  animation: fx-meteor-a 7s var(--ease-fluid) 1.2s infinite;
+}
+.fx-meteor-b {
+  animation: fx-meteor-b 9.5s var(--ease-fluid) 4.6s infinite;
+}
+@keyframes fx-meteor-a {
+  0% { transform: translate(1250px, 70px); opacity: 0; }
+  4% { opacity: 0.95; }
+  13% { transform: translate(960px, 210px); opacity: 0; }
+  100% { transform: translate(960px, 210px); opacity: 0; }
+}
+@keyframes fx-meteor-b {
+  0% { transform: translate(620px, 40px); opacity: 0; }
+  5% { opacity: 0.7; }
+  15% { transform: translate(430px, 120px); opacity: 0; }
+  100% { transform: translate(430px, 120px); opacity: 0; }
+}
+/* 星闪：呼吸式错峰微闪 */
+.fx-twinkle {
+  animation: fx-twinkle 5s var(--ease-fluid) infinite alternate;
+}
+@keyframes fx-twinkle {
+  from { opacity: 0.15; }
+  to { opacity: 0.9; }
+}
+/* 地平线辉光缓慢脉动 */
+.fx-horizon {
+  animation: fx-horizon 9s var(--ease-fluid) infinite;
+}
+@keyframes fx-horizon {
+  0%, 100% { opacity: 0.12; }
+  50% { opacity: 0.5; }
+}
+
 /* 登录卡：深色玻璃（科幻场景专属变体，与后台浅色玻璃形成入口对比） */
 .login-card {
-  width: 400px;
-  padding: 40px 36px 28px;
+  position: relative;
+  z-index: 1;
+  width: 440px;
+  padding: 44px 44px 36px;
   border-radius: 16px;
   border: 1px solid rgba(140, 180, 255, 0.28);
   background: linear-gradient(160deg, rgba(16, 28, 58, 0.62), rgba(8, 15, 35, 0.72));
@@ -434,15 +506,49 @@ html.dark .el-overlay {
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.12),
     0 24px 64px rgba(2, 8, 28, 0.6);
+  /* 一次性入场：淡入 + 上浮 + 轻缩放 */
+  animation: login-card-enter 0.6s var(--ease-fluid) backwards;
+}
+@keyframes login-card-enter {
+  from {
+    opacity: 0;
+    transform: translateY(16px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.login-card .el-card__body {
+  padding: 0;
+}
+
+/* 品牌区：几何标识 + 标题 + 副标题 */
+.login-logo {
+  display: block;
+  width: 56px;
+  height: 56px;
+  margin: 0 auto 18px;
+  filter: drop-shadow(0 0 14px rgba(77, 163, 255, 0.4));
 }
 .login-title {
   text-align: center;
-  margin: 0 0 28px;
+  margin: 0 0 10px;
   color: #f2f7ff;
   font-weight: 700;
-  font-size: 22px;
-  letter-spacing: 0.02em;
+  font-size: 26px;
+  letter-spacing: 0.04em;
 }
+/* text-indent 抵消末字符字距，保证光学居中 */
+.login-subtitle {
+  text-align: center;
+  margin: 0 0 30px;
+  color: rgba(238, 244, 255, 0.52);
+  font-size: 13px;
+  letter-spacing: 0.32em;
+  text-indent: 0.32em;
+}
+
 /* 暗玻璃内的输入框与文字 */
 .login-card .el-input__wrapper {
   background-color: rgba(255, 255, 255, 0.08);
@@ -450,8 +556,11 @@ html.dark .el-overlay {
 .login-card .el-input__wrapper:hover {
   box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.32) inset;
 }
+/* 聚焦：内描边 + 外辉光 */
 .login-card .el-input__wrapper.is-focus {
-  box-shadow: 0 0 0 1.5px rgba(77, 163, 255, 0.8) inset;
+  box-shadow:
+    0 0 0 1.5px rgba(77, 163, 255, 0.8) inset,
+    0 0 14px rgba(77, 163, 255, 0.28);
 }
 .login-card .el-input__inner {
   color: #eef4ff;
@@ -463,9 +572,44 @@ html.dark .el-overlay {
 .login-card .el-input__prefix {
   color: rgba(238, 244, 255, 0.6);
 }
-/* CTA 辉光：科幻签名 */
+/* CTA：辉光 + hover 增强 + sheen 扫过（科幻签名，action 色仍为唯一强调色） */
 .login-card .login-btn {
+  position: relative;
+  overflow: hidden;
   box-shadow: 0 4px 24px rgba(0, 113, 227, 0.5);
+  transition: box-shadow 0.2s var(--ease-fluid), transform 0.2s var(--ease-fluid);
+}
+.login-card .login-btn:hover {
+  box-shadow: 0 6px 32px rgba(0, 113, 227, 0.68);
+  transform: translateY(-1px);
+}
+.login-card .login-btn::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 40%;
+  background: linear-gradient(105deg, transparent, rgba(255, 255, 255, 0.35), transparent);
+  transform: translateX(-140%) skewX(-12deg);
+  transition: transform 0.7s var(--ease-fluid);
+}
+.login-card .login-btn:hover::after {
+  transform: translateX(280%) skewX(-12deg);
+}
+
+/* 页面底部版权行 */
+.login-footer {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 22px;
+  z-index: 1;
+  text-align: center;
+  color: rgba(238, 244, 255, 0.38);
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  user-select: none;
 }
 
 /* 无障碍：尊重减弱动效偏好 -------------------------------------------------- */
@@ -475,5 +619,7 @@ html.dark .el-overlay {
   *::after {
     transition-duration: 0.01ms !important;
     animation-duration: 0.01ms !important;
+    /* 无限循环动画须同时断循环，避免 0.01ms 时长下的快速空转 */
+    animation-iteration-count: 1 !important;
   }
 }
